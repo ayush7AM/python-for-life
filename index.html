@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Python Programming – MCQ Crash Module</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python Programming – Study Module & Practice</title>
 <style>
   @page { size: A4; margin: 14mm 12mm; }
   * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
@@ -11,7 +12,26 @@
   code, pre { font-family: Consolas, "Cascadia Mono", "Courier New", monospace; }
   code { background: #eef0f8; padding: 1px 5px; border-radius: 4px; font-size: 0.92em; color: #3b2f8f; }
 
-  /* Cover */
+  /* ===== Top navigation ===== */
+  .topnav { position: sticky; top: 0; z-index: 50; background: #ffffffee; backdrop-filter: blur(8px); border-bottom: 1px solid #e3e5f0; box-shadow: 0 2px 12px rgba(40,40,90,.06); }
+  .topnav .in { max-width: 860px; margin: 0 auto; padding: 10px 18px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .brand { font-weight: 800; font-size: 16px; color: #2b2d7c; margin-right: auto; }
+  .navbtn { border: 1px solid #d5d8ea; background: #fff; color: #3a3d5c; padding: 7px 14px; border-radius: 22px; font-weight: 600; font-size: 13.5px; cursor: pointer; font-family: inherit; }
+  .navbtn:hover { border-color: #5b3fc4; color: #5b3fc4; }
+  .navbtn.on { background: #5b3fc4; border-color: #5b3fc4; color: #fff; }
+  .navbtn .soon { font-size: 10.5px; background: #fef3c7; color: #92400e; padding: 1px 6px; border-radius: 8px; margin-left: 5px; font-weight: 700; }
+  .navbtn.on .soon { background: rgba(255,255,255,.25); color: #fff; }
+  .view { display: none; }
+  .view.show { display: block; }
+
+  /* ===== Coming soon ===== */
+  .soonbox { background: #fff; border: 1px solid #e3e5f0; border-radius: 18px; padding: 50px 28px; text-align: center; margin-top: 10px; }
+  .soonbox .ic { font-size: 54px; }
+  .soonbox h2 { margin: 10px 0 6px; font-size: 26px; color: #2b2d7c; }
+  .soonbox p { margin: 4px 0; color: #5b5f7e; }
+  .soonbox button { margin-top: 18px; }
+
+  /* ===== Study module ===== */
   .cover { background: linear-gradient(135deg, #2b2d7c 0%, #5b3fc4 55%, #f0a92e 140%); color: #fff; border-radius: 18px; padding: 36px 32px; margin-bottom: 22px; }
   .cover h1 { margin: 0 0 6px; font-size: 32px; letter-spacing: -0.5px; }
   .cover p { margin: 4px 0; opacity: .92; }
@@ -20,9 +40,9 @@
   .howto h3 { margin: 0 0 8px; }
   .legend { display: flex; flex-wrap: wrap; gap: 8px; }
   .legend div { font-size: 13px; padding: 5px 10px; border-radius: 8px; }
-  .printbtn { float: right; background: #5b3fc4; color: #fff; border: 0; padding: 8px 14px; border-radius: 8px; cursor: pointer; font-weight: 600; }
+  .printbtn { float: right; background: #5b3fc4; color: #fff; border: 0; padding: 8px 14px; border-radius: 8px; cursor: pointer; font-weight: 600; margin-left: 6px; }
+  .practicebtn { float: right; background: #16a34a; color: #fff; border: 0; padding: 8px 14px; border-radius: 8px; cursor: pointer; font-weight: 600; }
 
-  /* Units */
   .unit { border-radius: 16px; padding: 14px 22px; color: #fff; margin: 34px 0 14px; }
   .unit h2 { margin: 0; font-size: 24px; }
   .unit p { margin: 2px 0 0; opacity: .9; font-size: 13.5px; }
@@ -62,10 +82,63 @@
   .quiz ol li { margin-bottom: 10px; }
   .ans { font-size: 13.5px; background: #f0f1fa; padding: 10px 14px; border-radius: 10px; }
 
+  /* ===== Practice quiz (scoped to .qz) ===== */
+  .qz .qhead { background: linear-gradient(135deg, #25277a, #5b3fc4 60%, #e59a1f 150%); color: #fff; border-radius: 18px; padding: 22px 24px; }
+  .qz .qhead h1 { margin: 0; font-size: 26px; }
+  .qz .qhead p { margin: 6px 0 0; opacity: .9; font-size: 14px; }
+  .qz .score { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .qz .score span { background: rgba(255,255,255,.18); padding: 5px 12px; border-radius: 20px; font-size: 13px; }
+  .qz .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 10px; }
+  .qz .tab { border: 1px solid #d5d8ea; background: #fff; padding: 8px 14px; border-radius: 22px; cursor: pointer; font-size: 14px; font-weight: 600; color: #3a3d5c; font-family: inherit; }
+  .qz .tab.on { background: #5b3fc4; color: #fff; border-color: #5b3fc4; }
+  .qz .tab small { font-weight: 500; opacity: .8; }
+  .qz .palette { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 16px; }
+  .qz .pal { width: 34px; height: 34px; border-radius: 8px; border: 1px solid #d5d8ea; background: #fff; cursor: pointer; font-size: 13px; font-weight: 600; color: #3a3d5c; font-family: inherit; }
+  .qz .pal.cur { outline: 3px solid #5b3fc4; outline-offset: 1px; }
+  .qz .pal.ok { background: #16a34a; color: #fff; border-color: #16a34a; }
+  .qz .pal.bad { background: #e11d48; color: #fff; border-color: #e11d48; }
+  .qz .card { background: #fff; border-radius: 16px; padding: 22px; border: 1px solid #e1e3f0; box-shadow: 0 4px 18px rgba(40,40,90,.06); }
+  .qz .meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 13px; color: #6b6f8f; }
+  .qz .badge { padding: 3px 10px; border-radius: 12px; font-weight: 700; font-size: 12px; }
+  .qz .E { background: #dcfce7; color: #166534; }
+  .qz .M { background: #fef3c7; color: #92400e; }
+  .qz .T { background: #fee2e2; color: #9f1239; }
+  .qz .q { font-size: 17.5px; font-weight: 600; margin: 4px 0 12px; line-height: 1.45; }
+  .qz pre { background: #1e1f33; color: #e8e8f3; padding: 12px 14px; border-radius: 10px; font-size: 14.5px; white-space: pre-wrap; margin: 0 0 14px; }
+  .qz .opt { display: block; width: 100%; text-align: left; border: 2px solid #e1e3f0; background: #fafbff; border-radius: 12px; padding: 11px 14px; margin-bottom: 9px; cursor: pointer; font-size: 15px; color: #1d2030; transition: .15s; font-family: inherit; }
+  .qz .opt:hover:not([disabled]) { border-color: #5b3fc4; background: #f3f0ff; }
+  .qz .opt[disabled] { cursor: default; }
+  .qz .opt .t { white-space: pre-wrap; font-family: Consolas, "Courier New", monospace; }
+  .qz .opt .l { font-weight: 700; margin-right: 8px; color: #5b3fc4; }
+  .qz .opt.right { border-color: #16a34a; background: #effcf3; }
+  .qz .opt.wrong { border-color: #e11d48; background: #fff1f3; }
+  .qz .opt.dim { opacity: .85; }
+  .qz .why { display: block; margin-top: 6px; font-size: 13.5px; line-height: 1.4; font-family: "Segoe UI", system-ui, sans-serif; }
+  .qz .opt.right .why { color: #166534; }
+  .qz .opt.wrong .why { color: #6b213a; }
+  .qz .opt.dim .why { color: #555a78; }
+  .qz .verdict { padding: 12px 14px; border-radius: 12px; margin-top: 6px; font-size: 14.5px; font-weight: 600; }
+  .qz .verdict.ok { background: #dcfce7; color: #166534; }
+  .qz .verdict.bad { background: #ffe4e8; color: #9f1239; }
+  .qz .nav { display: flex; justify-content: space-between; gap: 10px; margin-top: 16px; }
+  .qz .btn { border: 0; padding: 10px 18px; border-radius: 10px; font-weight: 700; cursor: pointer; font-size: 14px; font-family: inherit; }
+  .qz .btn.p { background: #5b3fc4; color: #fff; }
+  .qz .btn.s { background: #e6e7f3; color: #3a3d5c; }
+  .qz .btn:disabled { opacity: .4; cursor: default; }
+  .qz .tools { display: flex; gap: 8px; justify-content: flex-end; margin-top: 18px; flex-wrap: wrap; }
+  .qz .result { background: #fff; border-radius: 16px; padding: 22px; border: 1px solid #e1e3f0; }
+  .qz .result table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+  .qz .result th, .qz .result td { padding: 9px 10px; border: 0; border-bottom: 1px solid #eceef7; text-align: left; font-size: 14.5px; }
+  .qz .result th { background: #f4f5fb; }
+  .qz .big { font-size: 34px; font-weight: 800; color: #5b3fc4; }
+  .btnlike { border: 0; padding: 10px 18px; border-radius: 10px; font-weight: 700; cursor: pointer; font-size: 14px; background: #5b3fc4; color: #fff; font-family: inherit; }
+
   @media print {
     body { background: #fff; font-size: 12.5px; }
+    .topnav, #v-unit1, #v-soon { display: none !important; }
+    #v-module { display: block !important; }
     .wrap { padding: 0; max-width: none; }
-    .printbtn { display: none; }
+    .printbtn, .practicebtn { display: none; }
     .topic, .trap, .tip, .remember, pre, table, .unit { break-inside: avoid; }
     .unit { break-before: page; }
     .unit.first { break-before: auto; }
@@ -74,6 +147,20 @@
 </style>
 </head>
 <body>
+
+<!-- ================= TOP NAVIGATION ================= -->
+<div class="topnav">
+  <div class="in">
+    <div class="brand">🐍 Python Prep</div>
+    <button class="navbtn on" data-view="module">📘 Study Module</button>
+    <button class="navbtn" data-view="unit1">✍️ Unit 1 Practice</button>
+    <button class="navbtn" data-view="soon" data-unit="Unit 2">Unit 2 Practice<span class="soon">Soon</span></button>
+    <button class="navbtn" data-view="soon" data-unit="Unit 3">Unit 3 Practice<span class="soon">Soon</span></button>
+  </div>
+</div>
+
+<!-- ================= VIEW: STUDY MODULE ================= -->
+<div class="view show" id="v-module">
 <div class="wrap">
 
 <div class="cover">
@@ -85,6 +172,7 @@
 
 <div class="howto">
   <button class="printbtn" onclick="window.print()">⬇ Save as PDF</button>
+  <button class="practicebtn" onclick="showView('unit1')">✍️ Practice Unit 1</button>
   <h3>How to use this module</h3>
   <p style="margin:0 0 8px">MCQs love <b>output-prediction</b> and <b>"which one gives an error"</b> questions. So every topic has code with its output, plus boxes that flag the tricks examiners use.</p>
   <div class="legend">
@@ -905,5 +993,356 @@ print(d1, d3)    <span class="o">{'x': 99} {'x': 1}</span></pre>
 <p style="text-align:center; color:#7a7f9a; margin-top:26px; font-size:13px">Read the code slowly, trace it line by line, and trust the rules. All the best! 🍀</p>
 
 </div>
+</div>
+
+<!-- ================= VIEW: UNIT 1 PRACTICE ================= -->
+<div class="view" id="v-unit1">
+<div class="wrap qz">
+  <div class="qhead">
+    <h1>Python Unit I – MCQ Practice</h1>
+    <p>Pick an answer to see why every option is right or wrong. Tags: <b>Easy</b>, <b>Medium</b>, <b>Tricky</b>.</p>
+    <div class="score" id="score"></div>
+  </div>
+
+  <div class="tabs" id="tabs"></div>
+  <div class="palette" id="palette"></div>
+  <div id="main"></div>
+
+  <div class="tools">
+    <button class="btn s" id="resBtn">See results</button>
+    <button class="btn s" id="resetBtn">Reset this section</button>
+  </div>
+</div>
+</div>
+
+<!-- ================= VIEW: COMING SOON ================= -->
+<div class="view" id="v-soon">
+<div class="wrap">
+  <div class="soonbox">
+    <div class="ic">🚧</div>
+    <h2 id="soonTitle">Unit 2 Practice</h2>
+    <p><b>Coming soon!</b> The practice questions for this unit are being prepared.</p>
+    <p>Meanwhile, revise the notes or practise Unit 1.</p>
+    <button class="btnlike" onclick="showView('unit1')">✍️ Practice Unit 1</button>
+    <button class="btnlike" style="background:#e6e7f3;color:#3a3d5c" onclick="showView('module')">📘 Back to Study Module</button>
+  </div>
+</div>
+</div>
+
+<script>
+// ================= VIEW SWITCHING =================
+function showView(v, unit) {
+  document.querySelectorAll('.view').forEach(el => el.classList.remove('show'));
+  document.getElementById('v-' + v).classList.add('show');
+  document.querySelectorAll('.navbtn').forEach(b => {
+    const match = b.dataset.view === v && (v !== 'soon' || b.dataset.unit === unit);
+    b.classList.toggle('on', match);
+  });
+  if (v === 'soon') document.getElementById('soonTitle').textContent = unit + ' Practice';
+  window.scrollTo(0, 0);
+}
+document.querySelectorAll('.navbtn').forEach(b => {
+  b.onclick = () => showView(b.dataset.view, b.dataset.unit);
+});
+
+// ================= UNIT 1 QUIZ =================
+const CATS = [
+  { k: 'th', n: 'Theory' },
+  { k: 'er', n: 'Error-based' },
+  { k: 'id', n: 'Identification' },
+  { k: 'ms', n: 'Miscellaneous' },
+  { k: 'bo', n: 'Precedence & Tricky' }
+];
+const DIFF = { E: 'Easy', M: 'Medium', T: 'Tricky' };
+
+const Q = [
+// ================= THEORY =================
+{c:'th',d:'E',q:'In which mode is Python code saved in a file with the .py extension and then executed?',o:['Interactive mode','Script (normal) mode','Shell mode','Debug mode'],a:1,r:['Interactive mode runs lines typed directly into the >>> shell, one at a time.','Script mode saves code in a .py file that the interpreter then runs. It is used for large programs.','Shell mode is just another name for interactive mode; it is not file-based.','Debug mode is not one of the two modes of running Python code.']},
+{c:'th',d:'E',q:'When does Python detect a syntax error?',o:['While the statement is executing','Before the statement is executed','Only after the whole program finishes','Syntax errors are never detected'],a:1,r:['That describes runtime errors, like division by zero.','Syntax errors break grammar rules, so the interpreter catches them before running the statement.','Errors are reported as soon as they are found, not at the end.','The interpreter always reports syntax errors with a traceback.']},
+{c:'th',d:'E',q:'Which of these is a markup language, not a programming language?',o:['Python','Go','XML','Erlang'],a:2,r:['Python is an interpreted, scripting and object-oriented programming language.','Go is a concurrency-oriented programming language.','XML (like HTML and JSON) is used to represent data and structure documents, not to program.','Erlang is a functional and concurrency-oriented programming language.']},
+{c:'th',d:'M',q:'Which category of languages is built on mathematical functions and uses conditional expressions and recursion?',o:['Procedural','Functional','Scripting','Object-oriented'],a:1,r:['Procedural languages organise code into procedures (C, Pascal, Fortran).','Functional languages (Haskell, Lisp, Erlang) compute using conditional expressions and recursion.','Scripting languages automate tasks (Perl, Bash).','OOP languages are built on classes, objects and inheritance.']},
+{c:'th',d:'M',q:'Concurrency-oriented languages are designed to:',o:['Execute operations strictly one after another','Handle multiple tasks at the same time','Be converted to machine code before execution','Represent documents and data'],a:1,r:['Sequential execution is the opposite of concurrency. This is a common trap statement.','Go and Erlang are designed to run multiple tasks simultaneously.','That describes compiled languages.','That describes markup languages like HTML and XML.']},
+{c:'th',d:'E',q:'Which of the following is a compiled language?',o:['Python','Ruby','Bash','Rust'],a:3,r:['Python is interpreted.','Ruby is interpreted and a scripting language.','Bash is a scripting language.','Rust, like C and C++, is compiled before execution.']},
+{c:'th',d:'M',q:'Python\'s use of indentation to define blocks was inherited from which language?',o:['C','ABC','Java','Perl'],a:1,r:['C uses braces { } for blocks.','Python inherited indentation-based blocks from its predecessor, ABC.','Java uses braces { }.','Perl uses braces { }.']},
+{c:'th',d:'E',q:'What are the smallest building blocks of a Python program?',o:['Statements','Tokens','Comments','Blocks'],a:1,r:['Statements are made up of tokens, so they are bigger.','Keywords, identifiers, literals, operators and delimiters are all tokens.','Comments are ignored by the interpreter; they are not part of the executable code.','Blocks contain many statements.']},
+{c:'th',d:'E',q:'Associating a value with a variable using = is called:',o:['Binding','Casting','Declaring','Linking'],a:0,r:['Assigning a value to a variable is called binding.','Casting means type conversion, like int() or float().','Python has no declaration command; a variable is created when it is assigned.','Linking is not the Python term for this.']},
+{c:'th',d:'M',q:'Which is the only statement in Python that does not start with a keyword?',o:['if statement','Assignment statement','while statement','import statement'],a:1,r:['if is a keyword.','An assignment like x = 5 starts with a variable name. There is no "assign" keyword.','while is a keyword.','import is a keyword.']},
+{c:'th',d:'M',q:'How many keywords does Python 3.5 have?',o:['32','33','35','30'],a:1,r:['32 is the count for Python 2.','Python 3.5 has 33 keywords.','35 is Python 3.7, after async and await became keywords.','No Python version has exactly 30.']},
+{c:'th',d:'M',q:'Which keywords were introduced in Python 3.10 for structural pattern matching?',o:['async and await','match and case','nonlocal','type'],a:1,r:['async and await are for asynchronous code (introduced in 3.5, keywords from 3.7).','match and case work like a more powerful switch-case.','nonlocal came in Python 3.0 for variables in an enclosing scope.','type came in Python 3.12 for type hinting.']},
+{c:'th',d:'E',q:'Which function checks whether a given word is a Python keyword?',o:['keyword.kwlist()','keyword.iskeyword()','iskeyword.check()','keyword.find()'],a:1,r:['kwlist is a list holding all keywords, not a function.','keyword.iskeyword("and") returns True.','There is no such module or function.','There is no such function in the keyword module.']},
+{c:'th',d:'E',q:'Which character encoding does Python use?',o:['ASCII','Unicode','Binary-coded decimal','EBCDIC'],a:1,r:['ASCII is smaller (8 bits); Python is not limited to it.','Python uses Unicode (32 bits), which covers characters from every language.','BCD encodes digits, not characters.','EBCDIC is an old IBM encoding.']},
+{c:'th',d:'M',q:'Which statement about sets is TRUE?',o:['Sets allow duplicate elements','Set elements must be immutable','A list can be an element of a set','{} creates an empty set'],a:1,r:['Sets remove duplicates; every element is unique.','Elements must be immutable, even though the set itself is mutable.','Lists are mutable, so they cannot be set elements.','{} creates an empty dictionary. Use set() for an empty set.']},
+{c:'th',d:'E',q:'Which is TRUE about dictionaries in Python 3.7 and later?',o:['Items are accessed by position, like d[0]','They preserve insertion order','Keys can be duplicated','Keys can be lists'],a:1,r:['Dictionaries are accessed by key, not position. d[0] works only if 0 is a key.','From Python 3.7, dictionaries officially keep insertion order.','Keys are unique; a repeated key overwrites the old value.','Keys must be immutable, and lists are mutable.']},
+{c:'th',d:'E',q:'What is the default value of the sep parameter in print()?',o:['A newline','A comma','A single space','Nothing (empty)'],a:2,r:['Newline is the default of end, not sep.','Values are not separated by commas by default.','print(1, 2) shows 1 2, with a space between.','If sep were empty, print(1, 2) would show 12.']},
+{c:'th',d:'E',q:'What is the default value of the end parameter in print()?',o:['A space','"\\n" (newline)','A tab','A full stop'],a:1,r:['Space is the default of sep.','That is why each print() starts on a new line.','Tab is not a default of print().','There is no such default.']},
+{c:'th',d:'M',q:'Which range of integers is cached by Python, so that "a is b" is True when both hold the same value?',o:['0 to 100','-5 to 256','-128 to 127','1 to 1000'],a:1,r:['This is not the cached range.','Small integers from -5 to 256 are interned (cached).','That is Java\'s Integer cache, not Python\'s.','Too large; 1000 is not cached.']},
+{c:'th',d:'M',q:'Which operator is evaluated from right to left?',o:['*','//','**','-'],a:2,r:['* is evaluated left to right.','// is evaluated left to right.','2 ** 3 ** 2 = 2 ** 9 = 512.','Subtraction is left to right: 10 - 4 - 3 = 3.']},
+
+// ================= ERROR-BASED =================
+{c:'er',d:'E',q:'Which error does this code produce?',code:'print("Hello World)',o:['NameError','SyntaxError','TypeError','ValueError'],a:1,r:['No undefined name is used.','The closing quote is missing: "unterminated string literal".','No operation on a wrong type happens.','No bad value is converted.']},
+{c:'er',d:'E',q:'What happens when this code runs?',code:'a = 10\nb = 0\nprint(a / b)',o:['SyntaxError','ValueError','ZeroDivisionError','No error, prints 0'],a:2,r:['The code is written correctly; the problem only appears when it runs.','No bad value is converted.','Dividing by zero is a runtime error.','Division by zero is never allowed.']},
+{c:'er',d:'E',q:'What happens when this code runs?',code:'marks = 90\nprint(Marks)',o:['Prints 90','NameError','SyntaxError','TypeError'],a:1,r:['Python is case-sensitive, so Marks is different from marks.','Marks was never assigned, so name \'Marks\' is not defined.','The syntax is valid.','No operation on wrong types.']},
+{c:'er',d:'M',q:'What is the result?',code:'print(ord("AB"))',o:['65','131','TypeError','ValueError'],a:2,r:['65 is the result of ord("A") only.','ord() does not add character codes.','ord() needs a string of length 1.','The error raised is TypeError, not ValueError.']},
+{c:'er',d:'M',q:'What is the result?',code:'print(hex(9.9))',o:['0x9.9','0x9','TypeError','ValueError'],a:2,r:['hex() works only on integers.','hex() does not truncate floats.','\'float\' object cannot be interpreted as an integer.','The error type is TypeError.']},
+{c:'er',d:'M',q:'What is the result?',code:'print(chr(-1))',o:['Prints an empty string','TypeError','ValueError','Prints -1'],a:2,r:['chr() raises an error for invalid values; it does not return an empty string.','The type (int) is correct; the value is the problem.','chr() arg not in range(0x110000). The valid range is 0 to 1,114,111.','chr() returns a character, not a number.']},
+{c:'er',d:'E',q:'What is the result?',code:'print(float("hello"))',o:['0.0','nan','ValueError','TypeError'],a:2,r:['float() does not default to 0.0 for bad text.','Only the text "nan" gives nan.','The string cannot be converted to a float.','A string is an allowed type for float(); its value is the problem.']},
+{c:'er',d:'T',q:'What is the result?',code:'print(int("12.5"))',o:['12','12.5','13','ValueError'],a:3,r:['int() truncates a float like int(12.5), but not a decimal string.','int() never returns a float.','int() never rounds.','"12.5" is not a valid integer string. You would need int(float("12.5")).']},
+{c:'er',d:'E',q:'What happens when this code runs?',code:'d = {"a": 1}\nprint(d["b"])',o:['Prints None','KeyError','IndexError','Prints 0'],a:1,r:['None is returned only by d.get("b").','Accessing a missing key with [ ] raises KeyError.','IndexError is for lists, strings and tuples.','No default value is used with [ ].']},
+{c:'er',d:'M',q:'What happens when this code runs?',code:'d = {"a": 1}\nprint(d.get("b"))',o:['KeyError','Prints None','Prints 0','Prints b'],a:1,r:['get() is the safe way to read a key; it never raises KeyError.','get() returns None when the key is missing (or a default value if one is given).','0 would print only with d.get("b", 0).','get() returns a value, not the key.']},
+{c:'er',d:'E',q:'What is the result?',code:'print("5" + 5)',o:['10','55','TypeError','ValueError'],a:2,r:['A string and an int cannot be added.','Getting 55 needs "5" + "5" or "5" + str(5).','can only concatenate str (not "int") to str.','The error is about type, not value.']},
+{c:'er',d:'E',q:'What happens when this code runs?',code:'if True:\nprint("Yes")',o:['Prints Yes','IndentationError','NameError','Prints nothing'],a:1,r:['It cannot print, because the body of if is not indented.','The body after the colon must be indented.','No undefined names are used.','The code does not run at all; it fails first.']},
+{c:'er',d:'E',q:'What happens when this code runs?',code:'l = [1, 2, 3]\nprint(l[3])',o:['Prints 3','Prints None','IndexError','KeyError'],a:2,r:['Index 3 would be the 4th item; the last valid index is 2.','Lists do not return None for a bad index.','Valid indexes are 0 to n-1, which is 0 to 2 here.','KeyError is for dictionaries.']},
+{c:'er',d:'M',q:'What happens when this code runs?',code:'t = (1, 2, 3)\nt[0] = 10',o:['t becomes (10, 2, 3)','TypeError','IndexError','SyntaxError'],a:1,r:['Tuples are immutable, so they cannot change.','\'tuple\' object does not support item assignment.','Index 0 exists.','The syntax is valid; the operation is not allowed.']},
+{c:'er',d:'T',q:'What happens when this code runs?',code:'s = {[1, 2], 3}',o:['Creates a set with 2 elements','Creates a set with 3 elements','TypeError','SyntaxError'],a:2,r:['A list cannot be a set element.','A list is not unpacked into a set like this.','Set elements must be immutable, and a list is not (unhashable type: \'list\').','The syntax is fine; the element type is the problem.']},
+{c:'er',d:'M',q:'The user types the word ten. What happens?',code:'x = int(input("Enter: "))',o:['x becomes 10','x becomes "ten"','ValueError','NameError'],a:2,r:['Python does not understand number words.','int() converts the text; it does not keep it as a string.','"ten" is not a valid integer string.','No undefined names are used.']},
+{c:'er',d:'E',q:'What happens when this code runs?',code:'for = 5',o:['for becomes 5','SyntaxError','NameError','TypeError'],a:1,r:['Keywords cannot be used as variable names.','for is a keyword, so using it as an identifier is invalid syntax.','It fails before any name is looked up.','This is not a type problem.']},
+{c:'er',d:'E',q:'What happens when this code runs?',code:'2 = a',o:['a becomes 2','SyntaxError','NameError','Nothing happens'],a:1,r:['The left side of = must be a variable, not a value.','You cannot assign to a literal.','The error is in the syntax, before names are looked up.','It raises an error.']},
+{c:'er',d:'T',q:'What is the result?',code:'print(oct("10"))',o:['0o12','0o10','TypeError','ValueError'],a:2,r:['oct() needs an int, not a string. oct(10) would give 0o12.','This is not a valid result.','A str cannot be interpreted as an integer by oct().','The problem is the type (str), so the error is TypeError.']},
+{c:'er',d:'M',q:'Which of these is a RUNTIME error, not a syntax error?',o:['print("Hi)  (missing quote)','if x > 5  (missing colon)','print(10 / 0)','class = 3  (keyword as name)'],a:2,r:['A missing quote is a syntax error, caught before running.','A missing colon is a syntax error.','The code is valid, but dividing by zero fails during execution.','Using a keyword as a name is a syntax error.']},
+
+// ================= IDENTIFICATION =================
+{c:'id',d:'E',q:'Which is a VALID identifier?',o:['1st_name','_total','my-name','email@id'],a:1,r:['An identifier cannot start with a digit.','It starts with an underscore and has only letters and _.','A hyphen (-) is not allowed.','@ is not allowed.']},
+{c:'id',d:'E',q:'Which is an INVALID identifier?',o:['amount_1','Amount','$amount','_a1'],a:2,r:['Valid: letters, a digit and an underscore.','Valid; uppercase letters are allowed.','$ is not allowed; the only allowed symbol is _.','Valid; it starts with an underscore.']},
+{c:'id',d:'E',q:'Which of these is a keyword?',o:['print','nonlocal','input','main'],a:1,r:['print is a built-in function name (an identifier), not a keyword.','nonlocal is a reserved keyword.','input is a built-in function name.','main is just an ordinary name.']},
+{c:'id',d:'M',q:'Which of these is NOT a keyword?',o:['True','None','true','and'],a:2,r:['True is a keyword.','None is a keyword.','Only True with a capital T is a keyword; true is an ordinary name.','and is a keyword.']},
+{c:'id',d:'M',q:'In this line, what type of token is the colon (:)?',code:'if x > 5:',o:['Operator','Delimiter','Literal','Keyword'],a:1,r:['Operators perform operations; > is the operator in this line.','Characters like : , ( ) [ ] { } are delimiters.','Literals are constant values, like 5.','if is the keyword.']},
+{c:'id',d:'E',q:'What type of token is 10 in this statement?',code:'x = 10',o:['Identifier','Operator','Literal','Keyword'],a:2,r:['x is the identifier.','= is the operator.','A constant value is a literal.','There is no keyword in this line.']},
+{c:'id',d:'M',q:'What type of token is print?',code:'print("Yes")',o:['Keyword','Identifier','Literal','Delimiter'],a:1,r:['print is not in the keyword list.','print is the name of a function, so it is an identifier.','"Yes" is the literal.','( ) are the delimiters.']},
+{c:'id',d:'E',q:'What does type(x) return?',code:'x = 2 + 3j',o:["<class 'int'>","<class 'float'>","<class 'complex'>","<class 'str'>"],a:2,r:['It has an imaginary part, so it is not an int.','It is not a float.','a + bj is a complex number.','There are no quotes, so it is not a string.']},
+{c:'id',d:'M',q:'What is the type of x?',code:'x = (5)',o:['tuple','int','list','set'],a:1,r:['A one-element tuple needs a trailing comma: (5,).','(5) is just the number 5 in parentheses.','Lists use [ ].','Sets use { } with values.']},
+{c:'id',d:'E',q:'What is the type of x?',code:'x = (5,)',o:['int','tuple','list','str'],a:1,r:['The trailing comma changes it from an int.','The trailing comma makes a one-element tuple.','Lists use square brackets.','There are no quotes.']},
+{c:'id',d:'M',q:'What is the type of x?',code:'x = {}',o:['set','dict','list','tuple'],a:1,r:['An empty set must be created with set().','Empty curly braces create an empty dictionary.','Lists use [ ].','Tuples use ( ).']},
+{c:'id',d:'M',q:'What does a name with two leading and two trailing underscores, like __doc__, indicate?',o:['A private identifier','A strongly private identifier','A language-defined special name','An invalid identifier'],a:2,r:['Private is a single leading underscore: _name.','Strongly private is two leading underscores only: __name.','Names like __name__ are special names defined by the language.','Underscores are allowed in identifiers.']},
+{c:'id',d:'M',q:'An identifier that starts with a single underscore, like _count, indicates:',o:['A keyword','A private identifier','A strongly private identifier','A class name'],a:1,r:['Keywords are fixed reserved words.','A single leading underscore means private.','Strongly private uses two leading underscores.','Class names start with an uppercase letter.']},
+{c:'id',d:'E',q:'What is printed?',code:'print(type(10 / 2))',o:["<class 'int'>","<class 'float'>","<class 'complex'>","Error"],a:1,r:['/ always gives a float, even when the division is exact.','10 / 2 is 5.0, a float.','There is no imaginary part.','The code is valid.']},
+{c:'id',d:'E',q:'What is the type of x?',code:'x = "3.14"',o:['float','int','str','complex'],a:2,r:['The quotes make it text, not a number.','It is not an integer.','Anything inside quotes is a string.','It is not a complex number.']},
+{c:'id',d:'M',q:'Which is a valid complex number literal in Python?',o:['3+4i','3+4j','3+j4','3+4k'],a:1,r:['Python uses j, not i.','Real part plus imaginary part, with j written right after the number.','j must come after the number: 4j, not j4 (j4 would be a variable name).','k is not valid.']},
+{c:'id',d:'E',q:'Which data type is immutable?',o:['list','set','dict','tuple'],a:3,r:['Lists are mutable.','Sets are mutable (only their elements must be immutable).','Dictionaries are mutable.','Tuples cannot be changed after creation.']},
+{c:'id',d:'E',q:'Which operator is bitwise XOR?',o:['&','|','^','~'],a:2,r:['& is bitwise AND.','| is bitwise OR.','^ gives 1 where the two bits are different.','~ is bitwise NOT.']},
+{c:'id',d:'E',q:'The operators "is" and "is not" belong to which category?',o:['Membership','Identity','Logical','Value comparison'],a:1,r:['The membership operators are in and not in.','They compare memory identity (the id), not values.','The logical operators are and, or, not.','Values are compared with ==.']},
+{c:'id',d:'M',q:'Which of these is an augmented assignment statement?',o:['x = x + 1','x += 1','x == 1','x = y = 1'],a:1,r:['This is a basic assignment. It does the same job, written the long way.','An operator and assignment combined in one: +=.','== compares values; it does not assign.','This is a chained assignment.']},
+
+// ================= MISCELLANEOUS =================
+{c:'ms',d:'E',q:'What is printed?',code:'print(23 // 2)',o:['11.5','11','12','11.0'],a:1,r:['11.5 is the result of 23 / 2.','Floor division drops the decimal part.','// never rounds up for positive numbers.','Both operands are ints, so the result is an int.']},
+{c:'ms',d:'T',q:'What is printed?',code:'print(-11 // 3)',o:['-3','-4','-3.67','3'],a:1,r:['Floor division rounds towards negative infinity, not towards zero.','-3.67 floored (rounded down) is -4.','// does not give decimals for int operands.','The sign is not dropped.']},
+{c:'ms',d:'M',q:'What is printed?',code:'print(2 ** 3 ** 2)',o:['64','512','36','12'],a:1,r:['64 would be (2 ** 3) ** 2, but ** is evaluated right to left.','3 ** 2 = 9 first, then 2 ** 9 = 512.','This is not a result of these operations.','This is not a result of these operations.']},
+{c:'ms',d:'M',q:'What is printed?',code:'print(12 << 2)',o:['3','24','48','14'],a:2,r:['3 is the result of 12 >> 2.','24 would be a shift by 1 place.','12 x 2² = 48.','14 is 12 + 2.']},
+{c:'ms',d:'M',q:'What is printed?',code:'print(48 >> 3)',o:['6','384','16','45'],a:0,r:['48 / 2³ = 6.','384 is the result of 48 << 3.','16 is 48 / 3.','45 is 48 - 3.']},
+{c:'ms',d:'M',q:'What is printed?',code:'print(10 & 4)',o:['14','0','6','40'],a:1,r:['14 is the result of 10 | 4.','1010 & 0100 = 0000; no bit is 1 in both numbers.','6 is 10 - 4.','40 is 10 * 4.']},
+{c:'ms',d:'M',q:'What is printed?',code:'print(10 | 4)',o:['14','0','6','104'],a:0,r:['1010 | 0100 = 1110, which is 14.','0 is the result of 10 & 4.','6 is 10 - 4.','This is not a bitwise result.']},
+{c:'ms',d:'T',q:'What is printed?',code:'print(~5)',o:['-5','-6','4','6'],a:1,r:['~ is not simple negation.','~x = -(x + 1), so ~5 = -6.','This is not correct.','The result is negative.']},
+{c:'ms',d:'M',q:'What is printed?',code:'print(int("0011", 2))',o:['11','3','0011','9'],a:1,r:['11 would be the result in base 10.','Binary 11 = 2 + 1 = 3.','int() returns a number, not the string.','This is not the binary value.']},
+{c:'ms',d:'M',q:'What is printed?',code:'print(float(" -24.45 "))',o:['ValueError','-24.45','24.45','" -24.45 "'],a:1,r:['Leading and trailing spaces are allowed; they are trimmed.','The spaces are trimmed and the text becomes the float -24.45.','The minus sign is kept.','float() returns a number, not text.']},
+{c:'ms',d:'E',q:'What is printed?',code:'print(hex(45))',o:['0x2d','0o55','0b101101','2d'],a:0,r:['Hexadecimal strings start with 0x.','0o55 is the result of oct(45).','0b101101 is bin(45).','The 0x prefix is always included.']},
+{c:'ms',d:'E',q:'What is printed?',code:'print(oct(45))',o:['0x2d','0o55','55','0o45'],a:1,r:['0x2d is the result of hex(45).','45 = 5 x 8 + 5, written with the 0o prefix.','The 0o prefix is always included.','45 in octal is 55, not 45.']},
+{c:'ms',d:'E',q:'What is printed?',code:'print(chr(65) + chr(97))',o:['162','Aa','aA','TypeError'],a:1,r:['chr() returns characters, which are joined, not added as numbers.','65 is A and 97 is a.','The order is reversed.','Two strings can be joined with +.']},
+{c:'ms',d:'M',q:'What is printed?',code:'a = b = c = 7\nb += 1\nprint(a, b, c)',o:['8 8 8','7 8 7','7 7 7','8 8 7'],a:1,r:['Changing b gives only b a new value; a and c keep 7 (ints are immutable).','Only b is rebound, to 8.','b did change.','a did not change.']},
+{c:'ms',d:'M',q:'What is printed?',code:'x = 40\ny = 30\nx %= y\nprint(x)',o:['10','1','1.3333333333333333','70'],a:0,r:['x = 40 % 30 = 10.','1 is the result of 40 // 30.','That is 40 / 30.','70 is 40 + 30.']},
+{c:'ms',d:'E',q:'What is printed?',code:'print(1, 2, 3, sep="-")',o:['1 2 3','1-2-3','123','1-2-3-'],a:1,r:['sep replaces the default space.','The values are joined by the separator.','The separator is -, not empty.','sep goes only between values, not at the end.']},
+{c:'ms',d:'M',q:'What is printed?',code:'print("A", end="*")\nprint("B")',o:['A\nB','A*B','A* B','A*\nB'],a:1,r:['end replaces the newline, so B does not go to a new line.','The first print ends with * instead of a newline.','No extra space is added.','The newline was replaced by *.']},
+{c:'ms',d:'E',q:'What is printed?',code:'print("%.2f" % 3.14159)',o:['3.14159','3.14','3.1','3.142'],a:1,r:['.2 limits the output to 2 decimals.','%.2f shows 2 digits after the decimal point.','That would need %.1f.','That would need %.3f.']},
+{c:'ms',d:'M',q:'What is printed?',code:'print("{1} {0}".format("x", "y"))',o:['x y','y x','{1} {0}','Error'],a:1,r:['The index numbers change the order.','{1} is the second argument "y" and {0} is "x".','The placeholders are replaced.','The code is valid.']},
+{c:'ms',d:'T',q:'What is printed? (· stands for a space)',code:'print("%5d" % 42)',o:['42','···42','42···','00042'],a:1,r:['Width 5 pads the number.','%5d right-aligns 42 in 5 places, adding 3 leading spaces.','Numbers are right-aligned by default, so the spaces go before.','Zero-padding needs %05d.']},
+{c:'ms',d:'T',q:'What is printed?',code:'print(2 or 0 and 5)',o:['2','0','5','True'],a:0,r:['and is evaluated first: 0 and 5 = 0. Then 2 or 0 = 2.','0 is only the result of the and part.','or does not return 5 here.','or returns one of its operands, not True.']},
+{c:'ms',d:'M',q:'What is printed?',code:'a, b, c = 2, 0, 3\nprint(a and b or c)',o:['0','3','2','True'],a:1,r:['a and b gives 0, but then "0 or 3" is still evaluated.','(2 and 0) = 0, then 0 or 3 = 3.','This is not the final result.','Logical operators return operands, not True.']},
+{c:'ms',d:'T',q:'What is printed?',code:'print("" in "Python")',o:['True','False','Error','None'],a:0,r:['An empty string is a substring of every string.','This is the trap: "" is always found in any string.','The code is valid.','in always returns True or False.']},
+{c:'ms',d:'M',q:'What is printed?',code:'print("life" in ["Code", "Life"])',o:['True','False','Error','None'],a:1,r:['The check is case-sensitive: "life" is not "Life".','No element equals "life" exactly.','The code is valid.','in returns a Boolean.']},
+{c:'ms',d:'M',q:'What is printed?',code:'d = {"apple": 20}\nprint(20 in d)',o:['True','False','KeyError','20'],a:1,r:['in checks only the keys of a dictionary.','20 is a value, not a key.','in never raises KeyError.','in returns a Boolean.']},
+{c:'ms',d:'M',q:'What is printed?',code:'a = 10\nb = 10\nprint(a is b)',o:['True','False','Error','10'],a:0,r:['10 is in the cached range -5 to 256, so both names point to the same object.','Small integers share the same memory location.','The code is valid.','is returns a Boolean.']},
+{c:'ms',d:'M',q:'What is printed?',code:'l = [1, 4, 6, 22, 44, 12, 55, 66]\nprint(l[3:-3])',o:['[22, 44]','[22, 44, 12]','[6, 22, 44]','[4, 6, 22]'],a:0,r:['From index 3 up to, but not including, index -3 (the value 12).','The stop index -3 (the value 12) is excluded.','Index 3 is 22, not 6.','That is l[1:4].']},
+{c:'ms',d:'E',q:'What is printed?',code:'print(2 * [4, "hi"])',o:["[8, 'hihi']","[4, 'hi', 4, 'hi']","[[4, 'hi'], [4, 'hi']]","Error"],a:1,r:['* repeats the list; it does not multiply each item.','The list is repeated twice.','It does not create a nested list.','Multiplying a list by an int is valid.']},
+{c:'ms',d:'M',q:'What is printed?',code:'x = [23, 5.65, ["A", 34.23], "India"]\nprint(x[2][1])',o:['A','34.23','5.65','India'],a:1,r:['A is x[2][0].','x[2] is ["A", 34.23], and index 1 of it is 34.23.','5.65 is x[1].','India is x[3].']},
+{c:'ms',d:'T',q:'What is printed?',code:'print(2 + 3 * 4 ** 2 // 6 - ~1)',o:['8','10','12','14'],a:2,r:['8 is only the 48 // 6 part.','This forgets the "- ~1" part: subtracting -2 adds 2.','4 ** 2 = 16, 3 * 16 = 48, 48 // 6 = 8, ~1 = -2, and 2 + 8 - (-2) = 12.','~1 is -2, not -4.']},
+
+// ================= PRECEDENCE & TRICKY =================
+{c:'bo',d:'M',q:'What is printed?',code:'print(type(9.0 // 2.0))',o:["<class 'int'>","<class 'float'>","4","Error"],a:1,r:['// with float operands gives a float (4.0).','9.0 // 2.0 = 4.0, which is a float.','type() returns a class, not a value.','The code is valid.']},
+{c:'bo',d:'E',q:'What is printed?',code:'print(5 + 2 > 6)',o:['True','False','7','Error'],a:0,r:['+ is evaluated before >, so this is 7 > 6.','Arithmetic happens before comparison.','A comparison gives a Boolean.','The code is valid.']},
+{c:'bo',d:'M',q:'What is printed?',code:'print(True or False and False)',o:['True','False','None','Error'],a:0,r:['and first: False and False = False. Then True or False = True.','False would need (True or False) and False, but and has higher precedence than or.','This is not possible.','The code is valid.']},
+{c:'bo',d:'E',q:'What is printed?',code:'print(isinstance(7.02, int))',o:['True','False','7','Error'],a:1,r:['7.02 is a float.','7.02 is not an int.','isinstance() returns a Boolean.','The code is valid.']},
+{c:'bo',d:'M',q:'What is printed?',code:'print(float("InFiNiTy"))',o:['ValueError','inf','Infinity','nan'],a:1,r:['Case does not matter for "inf" or "infinity".','The result is printed as inf.','Python prints inf, not Infinity.','nan means "not a number".']},
+{c:'bo',d:'E',q:'What is printed?',code:'print(complex("10+4j"))',o:['(10+4j)','10+4j','14','Error'],a:0,r:['Complex numbers are printed inside parentheses.','print() shows parentheses for complex numbers.','The real and imaginary parts are not added.','The string is a valid complex number.']},
+{c:'bo',d:'E',q:'What is printed?',code:'print(1 < 5 < 10)',o:['True','False','Error','1'],a:0,r:['A chained comparison means (1 < 5) and (5 < 10).','Both parts are true.','Chaining comparisons is allowed in Python.','Comparisons return Booleans.']},
+{c:'bo',d:'M',q:'What is printed?',code:'print(100 / 10 * 10)',o:['1.0','100.0','100','1'],a:1,r:['1.0 would be 100 / (10 * 10), but * and / go left to right.','(100 / 10) * 10 = 100.0; / makes it a float.','/ makes the result a float.','Wrong order of evaluation.']},
+{c:'bo',d:'T',q:'What is printed?',code:'print(5 | 2 & 3)',o:['7','3','2','1'],a:0,r:['& is evaluated first: 2 & 3 = 2. Then 5 | 2 = 7.','3 would need (5 | 2) & 3.','2 is only the 2 & 3 part.','This is not a valid step.']},
+{c:'bo',d:'T',q:'What is printed?',code:'print(2 << 3 + 1)',o:['17','32','16','Error'],a:1,r:['17 would be (2 << 3) + 1, but + is evaluated before <<.','3 + 1 = 4, then 2 << 4 = 32.','16 is 2 << 3.','The code is valid.']},
+{c:'bo',d:'M',q:'What is printed?',code:'a = 100\nb = 3\nprint(eval("a * b"))',o:['a * b','300','Error','"300"'],a:1,r:['eval() runs the string as code instead of printing it.','eval() evaluates "a * b" using the variables, giving 300.','The code is valid.','eval() returns the number 300, not a string.']},
+{c:'bo',d:'E',q:'What is printed?',code:'import keyword\nprint(keyword.iskeyword("True"))',o:['True','False','Error','None'],a:0,r:['True (capital T) is a keyword.','"True" with a capital T is in the keyword list.','The code is valid.','iskeyword() returns a Boolean.']}
+];
+
+let cat = 'th';
+let pos = 0;
+const ans = {};
+let showRes = false;
+
+const list = () => Q.map((x, i) => i).filter(i => Q[i].c === cat);
+
+function stats(k) {
+  const ids = Q.map((x, i) => i).filter(i => !k || Q[i].c === k);
+  let done = 0, ok = 0;
+  ids.forEach(i => { if (ans[i] !== undefined) { done++; if (ans[i] === Q[i].a) ok++; } });
+  return { total: ids.length, done, ok };
+}
+
+function renderScore() {
+  const s = stats();
+  document.getElementById('score').innerHTML =
+    `<span>Answered: ${s.done} / ${s.total}</span><span>Correct: ${s.ok}</span><span>Accuracy: ${s.done ? Math.round(s.ok / s.done * 100) : 0}%</span>`;
+}
+
+function renderTabs() {
+  const t = document.getElementById('tabs');
+  t.innerHTML = '';
+  CATS.forEach(c => {
+    const s = stats(c.k);
+    const b = document.createElement('button');
+    b.className = 'tab' + (c.k === cat && !showRes ? ' on' : '');
+    b.innerHTML = `${c.n} <small>(${s.ok}/${s.total})</small>`;
+    b.onclick = () => { cat = c.k; pos = 0; showRes = false; render(); };
+    t.appendChild(b);
+  });
+}
+
+function renderPalette() {
+  const p = document.getElementById('palette');
+  p.innerHTML = '';
+  if (showRes) return;
+  list().forEach((qi, n) => {
+    const b = document.createElement('button');
+    let cls = 'pal';
+    if (n === pos) cls += ' cur';
+    if (ans[qi] !== undefined) cls += ans[qi] === Q[qi].a ? ' ok' : ' bad';
+    b.className = cls;
+    b.textContent = n + 1;
+    b.onclick = () => { pos = n; render(); };
+    p.appendChild(b);
+  });
+}
+
+function renderQ() {
+  const m = document.getElementById('main');
+  const L = list();
+  const qi = L[pos];
+  const x = Q[qi];
+  const answered = ans[qi] !== undefined;
+  m.innerHTML = '';
+
+  const card = document.createElement('div');
+  card.className = 'card';
+
+  const meta = document.createElement('div');
+  meta.className = 'meta';
+  meta.innerHTML = `<span>Question ${pos + 1} of ${L.length}</span><span class="badge ${x.d}">${DIFF[x.d]}</span>`;
+  card.appendChild(meta);
+
+  const q = document.createElement('div');
+  q.className = 'q';
+  q.textContent = x.q;
+  card.appendChild(q);
+
+  if (x.code) {
+    const pre = document.createElement('pre');
+    pre.textContent = x.code;
+    card.appendChild(pre);
+  }
+
+  x.o.forEach((opt, i) => {
+    const b = document.createElement('button');
+    b.className = 'opt';
+    const l = document.createElement('span');
+    l.className = 'l';
+    l.textContent = 'ABCD'[i] + '.';
+    const t = document.createElement('span');
+    t.className = 't';
+    t.textContent = opt;
+    b.appendChild(l);
+    b.appendChild(t);
+    if (answered) {
+      b.disabled = true;
+      if (i === x.a) b.classList.add('right');
+      else if (i === ans[qi]) b.classList.add('wrong');
+      else b.classList.add('dim');
+      const w = document.createElement('span');
+      w.className = 'why';
+      w.textContent = (i === x.a ? '✔ Correct: ' : '✘ Wrong: ') + x.r[i];
+      b.appendChild(w);
+    } else {
+      b.onclick = () => { ans[qi] = i; render(); };
+    }
+    card.appendChild(b);
+  });
+
+  if (answered) {
+    const v = document.createElement('div');
+    const good = ans[qi] === x.a;
+    v.className = 'verdict ' + (good ? 'ok' : 'bad');
+    v.textContent = good
+      ? 'Well done! Your answer is correct.'
+      : 'Not quite. The correct answer is ' + 'ABCD'[x.a] + '. Read the reasons under each option.';
+    card.appendChild(v);
+  }
+
+  const nav = document.createElement('div');
+  nav.className = 'nav';
+  const prev = document.createElement('button');
+  prev.className = 'btn s';
+  prev.textContent = '← Previous';
+  prev.disabled = pos === 0;
+  prev.onclick = () => { pos--; render(); };
+  const next = document.createElement('button');
+  next.className = 'btn p';
+  const lastCat = CATS.findIndex(c => c.k === cat) === CATS.length - 1;
+  if (pos < L.length - 1) {
+    next.textContent = 'Next →';
+    next.onclick = () => { pos++; render(); };
+  } else if (!lastCat) {
+    next.textContent = 'Next section →';
+    next.onclick = () => { cat = CATS[CATS.findIndex(c => c.k === cat) + 1].k; pos = 0; render(); };
+  } else {
+    next.textContent = 'See results';
+    next.onclick = () => { showRes = true; render(); };
+  }
+  nav.appendChild(prev);
+  nav.appendChild(next);
+  card.appendChild(nav);
+
+  m.appendChild(card);
+}
+
+function renderResults() {
+  const m = document.getElementById('main');
+  const s = stats();
+  let rows = '';
+  CATS.forEach(c => {
+    const t = stats(c.k);
+    rows += `<tr><td>${c.n}</td><td>${t.done} / ${t.total}</td><td>${t.ok}</td><td>${t.done ? Math.round(t.ok / t.done * 100) : 0}%</td></tr>`;
+  });
+  const pct = s.done ? Math.round(s.ok / s.done * 100) : 0;
+  let msg = 'Start answering to see your progress.';
+  if (s.done) msg = pct >= 85 ? 'Excellent! You are test-ready.' : pct >= 65 ? 'Good. Revise the questions you got wrong.' : 'Keep going. Reread the notes for your weakest section.';
+  m.innerHTML = `<div class="result">
+    <div class="big">${s.ok} / ${s.total}</div>
+    <p style="margin:4px 0 0">${msg}</p>
+    <table><tr><th>Section</th><th>Answered</th><th>Correct</th><th>Accuracy</th></tr>${rows}</table>
+    <p style="font-size:13.5px;color:#6b6f8f;margin-bottom:0">Tip: open any section and tap the red numbers to review your mistakes.</p>
+  </div>`;
+}
+
+function render() {
+  renderScore();
+  renderTabs();
+  renderPalette();
+  if (showRes) renderResults(); else renderQ();
+}
+
+document.getElementById('resBtn').onclick = () => { showRes = true; render(); };
+document.getElementById('resetBtn').onclick = () => {
+  if (showRes) { Object.keys(ans).forEach(k => delete ans[k]); showRes = false; pos = 0; render(); return; }
+  list().forEach(i => delete ans[i]);
+  pos = 0;
+  render();
+};
+
+render();
+</script>
 </body>
 </html>
