@@ -154,7 +154,7 @@
     <div class="brand">🐍 Python Prep</div>
     <button class="navbtn on" data-view="module">📘 Study Module</button>
     <button class="navbtn" data-view="unit1">✍️ Unit 1 Practice</button>
-    <button class="navbtn" data-view="soon" data-unit="Unit 2">Unit 2 Practice<span class="soon">Soon</span></button>
+    <button class="navbtn" data-view="unit2">✍️ Unit 2 Practice</button>
     <button class="navbtn" data-view="soon" data-unit="Unit 3">Unit 3 Practice<span class="soon">Soon</span></button>
   </div>
 </div>
@@ -1014,6 +1014,321 @@ print(d1, d3)    <span class="o">{'x': 99} {'x': 1}</span></pre>
   </div>
 </div>
 </div>
+
+<!-- ================= VIEW: UNIT 2 PRACTICE ================= -->
+<style>@media print { #v-unit2 { display: none !important; } }</style>
+<div class="view" id="v-unit2">
+<div class="wrap qz">
+  <div class="qhead" style="background: linear-gradient(135deg, #9a3412, #ea580c 55%, #f59e0b 130%);">
+    <h1>Python Unit II – MCQ Practice</h1>
+    <p>Decisions, loops, match-case, break / continue / pass. Pick an answer to see why every option is right or wrong.</p>
+    <div class="score" id="score2"></div>
+  </div>
+
+  <div class="tabs" id="tabs2"></div>
+  <div class="palette" id="palette2"></div>
+  <div id="main2"></div>
+
+  <div class="tools">
+    <button class="btn s" id="resBtn2">See results</button>
+    <button class="btn s" id="resetBtn2">Reset this section</button>
+  </div>
+</div>
+</div>
+
+<script>
+(function () {
+const CATS = [
+  { k: 'th', n: 'Theory' },
+  { k: 'er', n: 'Error-based' },
+  { k: 'id', n: 'Identification' },
+  { k: 'ms', n: 'Miscellaneous' },
+  { k: 'bn', n: 'Beyond the Notes' }
+];
+const DIFF = { E: 'Easy', M: 'Medium', T: 'Tricky' };
+
+const Q = [
+// ================= THEORY =================
+{c:'th',d:'E',q:'Which of these is NOT one of the three types of control-flow statements?',o:['Selection statements','Iterative statements','Loop control statements','Declarative statements'],a:3,r:['Selection statements (if, if-else, if-elif-else) are one of the three types.','Iterative statements (while, for, else on loops) are one of the three types.','Loop control statements (break, continue, pass) are one of the three types.','There is no "declarative" type. The three are selection, iterative and loop control.']},
+{c:'th',d:'E',q:'break, continue and pass belong to which type of control-flow statement?',o:['Selection statements','Iterative statements','Loop control statements','Assignment statements'],a:2,r:['Selection statements choose a path: if, elif, else.','Iterative statements repeat code: while, for.','These transfer control to another part of the program, so they are loop control statements.','Assignment uses = to bind values; it is not a control-flow statement.']},
+{c:'th',d:'M',q:'The else clause on a loop (for-else, while-else) is listed under which type?',o:['Selection statements','Iterative statements','Loop control statements','It is not allowed in Python'],a:1,r:['Although it uses the word else, it is part of a loop, not an if.','The else clause on loop statements is grouped with while and for as an iterative statement.','Loop control statements are break, continue and pass.','Python does allow else on both for and while loops.']},
+{c:'th',d:'E',q:'How does Python mark the body (block) of an if statement?',o:['Curly braces { }','Indentation','begin and end keywords','Semicolons'],a:1,r:['Braces are used in C and Java, not Python.','The body is indented, and the first unindented line marks its end.','Python has no begin/end keywords.','Semicolons are not used to mark blocks.']},
+{c:'th',d:'E',q:'How does Python treat 0 and None when used as a condition?',o:['As True','As False','They raise an error','0 is True, None is False'],a:1,r:['Non-zero values are True, but 0 and None are not.','Python interprets 0 and None as False.','Any value can be used as a condition; no error.','Both 0 and None are False.']},
+{c:'th',d:'E',q:'In an if-elif-else chain, how many blocks are executed?',o:['Every block whose condition is True','Only one block','At least two blocks','None, unless else is present'],a:1,r:['Only the first True condition runs; later ones are skipped.','Exactly one block runs: the first True one, or else if none are True.','Only one block ever runs.','An if or elif can run even without an else.']},
+{c:'th',d:'E',q:'Which statement about if-elif-else is TRUE?',o:['An if can have many else blocks','An if can have only one elif','An if can have many elif blocks but only one else','elif cannot be used with else'],a:2,r:['Only one else is allowed.','You can chain as many elif blocks as needed.','Many elifs, but only one else, and it goes last.','elif and else are often used together.']},
+{c:'th',d:'E',q:'The match statement for pattern matching was introduced in which Python version?',o:['3.8','3.9','3.10','3.12'],a:2,r:['match did not exist in 3.8.','match did not exist in 3.9.','match-case was introduced in Python 3.10.','3.12 added the type keyword, not match.']},
+{c:'th',d:'E',q:'In a match statement, what does case _: do?',o:['Matches only an empty value','Acts as the default case, like else','Causes a SyntaxError','Matches only underscores'],a:1,r:['_ is a wildcard that matches anything, not just empty values.','_ matches anything, so it works as the default case.','case _: is valid syntax.','It is a wildcard, not a literal underscore match.']},
+{c:'th',d:'M',q:'Adding a condition to a case, like case x if x > 0:, is called a:',o:['Filter','Guard','Wildcard','Decorator'],a:1,r:['Filter is not the Python term here.','A condition added with if in a case is called a guard.','The wildcard is _.','Decorators are unrelated (they use @).']},
+{c:'th',d:'E',q:'When is the condition of a while loop checked?',o:['Only once, at the start','Before every iteration','Only after the loop ends','Only after the first iteration'],a:1,r:['It is re-checked after every iteration, not just once.','The condition is checked first, then again after each run of the body.','Once the loop ends, the condition is no longer checked.','It is checked before the first iteration too, so the body may run 0 times.']},
+{c:'th',d:'E',q:'A loop whose condition never becomes False is called:',o:['A nested loop','An infinite loop','An entry loop','A broken loop'],a:1,r:['A nested loop is a loop inside another loop.','It runs forever. A common cause is forgetting to update the loop variable.','Entry-controlled describes when the condition is checked.','"Broken loop" is not a Python term.']},
+{c:'th',d:'M',q:'The for loop in Python can also be termed:',o:['An exit-controlled loop','An entry-controlled loop','A do-while loop','A recursive loop'],a:1,r:['Python has no exit-controlled (do-while) loop.','A for loop is entry-controlled: it checks before each iteration.','Python does not have do-while.','Recursion is a function calling itself, not a loop type.']},
+{c:'th',d:'M',q:'When does range(stop) return an empty sequence?',o:['When stop is 1','When stop is 0 or negative','When stop is even','Never'],a:1,r:['range(1) gives 0, one value.','range(0) and range(-3) produce nothing.','Even numbers work normally.','It can be empty when stop is 0 or negative.']},
+{c:'th',d:'E',q:'For range(5), what are the default start and step values?',o:['Start 1, step 1','Start 0, step 1','Start 0, step 0','Start 1, step 0'],a:1,r:['The default start is 0, not 1.','range(5) = range(0, 5, 1), which gives 0 to 4.','Step can never be 0 (that raises ValueError).','Start is 0 and step is 1.']},
+{c:'th',d:'E',q:'When does the else block of a for loop execute?',o:['Every time the loop runs','Only when the loop ends without a break','Only when a break happens','Only if the loop runs zero times'],a:1,r:['It is skipped if break is executed.','else runs when the loop completes all iterations without break.','A break skips the else block.','It also runs when the loop completes normally with iterations.']},
+{c:'th',d:'E',q:'What does the break statement do?',o:['Skips the current iteration only','Terminates the loop immediately','Does nothing','Restarts the loop'],a:1,r:['Skipping one iteration is what continue does.','break exits the loop at once, and control goes to the first statement after it.','That is pass.','No statement restarts a loop.']},
+{c:'th',d:'E',q:'What does the continue statement do?',o:['Exits the loop','Skips the rest of the current iteration and moves to the next','Ends the program','Acts as a placeholder'],a:1,r:['Exiting the loop is break.','continue jumps to the next iteration without leaving the loop.','Neither statement ends the program.','A placeholder is pass.']},
+{c:'th',d:'E',q:'What is the pass statement used for?',o:['To exit a loop','To skip an iteration','As a placeholder that does nothing','To pass values to a function'],a:2,r:['That is break.','That is continue.','pass does nothing; it keeps the syntax valid where code is required.','Arguments are passed in parentheses, not with pass.']},
+{c:'th',d:'E',q:'In a nested loop, the inner loop:',o:['Runs once in total','Runs completely for each iteration of the outer loop','Runs only after the outer loop finishes','Runs only when the outer loop breaks'],a:1,r:['It runs again for every outer iteration.','For each single outer iteration, the inner loop runs from start to finish.','The inner loop runs inside the outer loop, not after it.','break has nothing to do with this.']},
+
+// ================= ERROR-BASED =================
+{c:'er',d:'E',q:'What happens when this code runs?',code:'x = 5\nif x > 3\n    print("Big")',o:['Prints Big','SyntaxError','IndentationError','Prints nothing'],a:1,r:['It cannot run, because the if header is incomplete.','The colon (:) at the end of the if line is missing.','The indentation is fine; the colon is the problem.','An error is raised instead.']},
+{c:'er',d:'M',q:'What happens when this code runs?',code:'x = 10\nif x > 5:\n    print("A")\n  print("B")',o:['Prints A and B','Prints only A','IndentationError','SyntaxError: missing colon'],a:2,r:['The second print is not aligned with any block.','Python does not skip badly indented lines.','"unindent does not match any outer indentation level": 2 spaces matches neither 0 nor 4.','The colon is present.']},
+{c:'er',d:'E',q:'What happens when this code runs?',code:'x = 5\nif x = 5:\n    print("Five")',o:['Prints Five','SyntaxError','NameError','Prints nothing'],a:1,r:['= is assignment and cannot be used as a condition here.','The condition needs ==, not =.','x is defined.','An error is raised.']},
+{c:'er',d:'E',q:'What happens when this code runs?',code:'for i in range(5)\n    print(i)',o:['Prints 0 to 4','Prints 1 to 5','SyntaxError','TypeError'],a:2,r:['It would, if the colon were there.','range(5) starts at 0 anyway.','The for header must end with a colon.','No wrong-type operation happens.']},
+{c:'er',d:'M',q:'What happens when this code runs?',code:'for i in range(1.5):\n    print(i)',o:['Prints 0 and 1','Prints 0','TypeError','ValueError'],a:2,r:['range() does not accept floats.','range() does not round.','\'float\' object cannot be interpreted as an integer.','The type (float) is the problem, so TypeError.']},
+{c:'er',d:'M',q:'What happens when this code runs?',code:'for i in 10:\n    print(i)',o:['Prints 0 to 9','Prints 10','TypeError','SyntaxError'],a:2,r:['That needs range(10).','A for loop needs a sequence, not a single number.','\'int\' object is not iterable.','The syntax is valid; the value cannot be looped over.']},
+{c:'er',d:'M',q:'What happens when this code runs?',code:'x = 5\nif x > 2:\nelse:\n    print("small")',o:['Prints small','Prints nothing','IndentationError','Runs forever'],a:2,r:['It fails before running.','It fails before running.','The if block is empty: "expected an indented block". Use pass as a placeholder.','There is no loop.']},
+{c:'er',d:'M',q:'What happens when this code runs?',code:'while True:\n    pass',o:['SyntaxError','Runs forever (infinite loop)','Runs once','Prints None'],a:1,r:['The code is valid.','The condition is always True and nothing breaks, so it never stops.','Nothing makes it stop after one run.','Nothing is printed.']},
+{c:'er',d:'E',q:'What happens when this code runs?',code:'if 5 > 3:\n    pass\nprint("Done")',o:['SyntaxError','IndentationError','Prints Done','Prints nothing'],a:2,r:['pass is valid syntax.','The if block contains pass, so it is not empty.','pass does nothing, then Done is printed.','The last line always runs.']},
+{c:'er',d:'M',q:'What happens when a program contains only this line?',code:'break',o:['Ends the program quietly','SyntaxError','NameError','Nothing happens'],a:1,r:['break is not a way to end a program.','\'break\' outside loop: break is allowed only inside a loop.','break is a keyword, not a name.','An error is raised.']},
+{c:'er',d:'M',q:'What happens when this code runs?',code:'i = 0\nwhile i < 3:\n    print(i)',o:['Prints 0 1 2','Prints 0 forever (infinite loop)','SyntaxError','Prints 0 once'],a:1,r:['i is never increased.','i stays 0, so i < 3 is always True. The update step is missing.','The code is valid.','The condition keeps being True.']},
+{c:'er',d:'T',q:'What is printed?',code:'for i in range(3):\n    continue\n    print(i)',o:['0 1 2','Nothing','SyntaxError','2'],a:1,r:['continue skips everything after it in each iteration.','print(i) is never reached, so nothing is printed. No error.','Code after continue is allowed; it just never runs.','Nothing is printed.']},
+{c:'er',d:'M',q:'What is printed?',code:'for i in range(5):\n    pass\nprint(i)',o:['5','4','NameError','0'],a:1,r:['range(5) stops before 5.','The loop variable keeps its last value, 4, after the loop.','i exists after the loop ends.','i was updated in every iteration.']},
+{c:'er',d:'M',q:'What happens when this code runs (Python 3.10+)?',code:'match 5:\n    case 1:\n        print("one")',o:['Prints one','Prints nothing, no error','ValueError','SyntaxError: default case missing'],a:1,r:['5 does not match 1.','If no case matches, nothing happens. case _ is optional.','No error is raised when nothing matches.','A default case is not required.']},
+{c:'er',d:'M',q:'What happens when this code runs?',code:'x = "5"\nif x > 3:\n    print("big")',o:['Prints big','Prints nothing','TypeError','ValueError'],a:2,r:['x is a string, not a number.','It fails before deciding.','\'>\' not supported between instances of \'str\' and \'int\'.','No conversion happens; the comparison itself fails.']},
+{c:'er',d:'E',q:'What happens when this code runs?',code:'for i in range(3):\nprint(i)',o:['Prints 0 1 2','IndentationError','SyntaxError: missing colon','Prints 3'],a:1,r:['The body is not indented.','The loop body must be indented: "expected an indented block".','The colon is present.','It fails before running.']},
+{c:'er',d:'E',q:'What happens when this code runs? (i is not defined before)',code:'while i < 5:\n    i += 1',o:['Runs 5 times','NameError','SyntaxError','Runs forever'],a:1,r:['i does not exist yet.','name \'i\' is not defined; it must be initialised first (i = 0).','The syntax is valid.','It fails at once.']},
+{c:'er',d:'E',q:'What happens when this code runs?',code:'if True:\n    print("A")\nelif:\n    print("B")',o:['Prints A','Prints A and B','SyntaxError','Prints B'],a:2,r:['It fails before running.','Only one branch could run anyway.','elif must have a condition, like elif x > 2:.','It fails before running.']},
+{c:'er',d:'E',q:'What happens when this code runs on its own?',code:'else:\n    print("x")',o:['Prints x','Prints nothing','SyntaxError','NameError'],a:2,r:['else cannot stand alone.','It fails before running.','else must follow an if, a loop or a try block.','else is a keyword, not a name.']},
+{c:'er',d:'M',q:'What happens when this code runs?',code:'x = 10\nif x > 5:\n    print("A")\nelse if x > 2:\n    print("B")',o:['Prints A','Prints A and B','SyntaxError','Prints B'],a:2,r:['It fails before running.','Only one branch could run anyway.','Python has no "else if"; you must write elif.','It fails before running.']},
+
+// ================= IDENTIFICATION =================
+{c:'id',d:'E',q:'Which construct is best for checking several mutually exclusive conditions?',o:['Simple if','if-else','if-elif-else','while loop'],a:2,r:['A simple if handles only one condition.','if-else handles only two paths.','if-elif-else chains many exclusive conditions, and only one block runs.','A while loop repeats code; it does not choose between paths.']},
+{c:'id',d:'E',q:'Which statement skips to the next iteration of a loop?',o:['break','continue','pass','return'],a:1,r:['break exits the loop completely.','continue skips the rest of the current iteration.','pass does nothing.','return exits a function.']},
+{c:'id',d:'E',q:'Which statement is used as a placeholder for code not yet written?',o:['break','continue','pass','else'],a:2,r:['break exits a loop.','continue skips an iteration.','pass does nothing; it keeps the syntax valid.','else is a branch of if or a loop.']},
+{c:'id',d:'M',q:'Which range call produces 10, 8, 6?',o:['range(10, 6, -2)','range(10, 5, -2)','range(6, 12, 2)','range(10, 6, 2)'],a:1,r:['Stop 6 is excluded, so this gives only 10, 8.','10, 8, 6. The next value, 4, would pass the stop 5.','This counts upward: 6, 8, 10.','A positive step with start > stop gives an empty range.']},
+{c:'id',d:'M',q:'How many values does range(2, 11, 3) produce?',o:['3','4','9','11'],a:0,r:['2, 5, 8. The next value, 11, is excluded.','11 is the stop value, so it is not included.','9 is 11 - 2, but the step is 3.','Not correct.']},
+{c:'id',d:'E',q:'Which keyword starts a pattern-matching block?',o:['switch','match','case','select'],a:1,r:['Python has no switch keyword.','match starts the block, and each case follows inside it.','case is used inside a match block, not to start it.','select is not a Python keyword.']},
+{c:'id',d:'E',q:'In match-case, which pattern is the wildcard?',o:['*','default','_','?'],a:2,r:['* is not the wildcard here.','Python uses _, not default.','_ matches anything and is used as the default case.','? is not valid.']},
+{c:'id',d:'M',q:'How many lines does this code print?',code:'for day in range(1, 4):\n    for p in range(1, 5):\n        print(day, p)',o:['7','9','12','20'],a:2,r:['Counts are multiplied, not added.','Not correct.','3 days x 4 periods = 12 lines.','Not correct.']},
+{c:'id',d:'E',q:'Which loop is used to iterate over each item of a sequence like a string or list?',o:['for loop','while loop','if statement','match statement'],a:0,r:['for val in sequence: takes each item in turn.','while repeats based on a condition, not over items.','if is not a loop.','match is not a loop.']},
+{c:'id',d:'E',q:'What is the value of i after this loop ends?',code:'i = 1\nwhile i <= 5:\n    i += 1',o:['5','6','4','1'],a:1,r:['When i is 5, the condition is still True, so it increases once more.','The loop stops when i becomes 6, because 6 <= 5 is False.','Not correct.','i is updated in the loop.']},
+{c:'id',d:'E',q:'Which values does range(5, 0, -1) produce?',o:['5 4 3 2 1 0','5 4 3 2 1','0 1 2 3 4 5','Nothing'],a:1,r:['The stop value 0 is excluded.','It counts down from 5 and stops before 0.','A negative step counts down, not up.','A negative step with start > stop works.']},
+{c:'id',d:'M',q:'What does range(-3) produce?',o:['-3 -2 -1','0 -1 -2','Nothing (empty)','Error'],a:2,r:['With one argument, the start is 0.','The default step is +1, which cannot reach -3.','range(stop) with a negative stop is empty.','No error is raised.']},
+{c:'id',d:'T',q:'Which condition correctly checks for a leap year?',o:['y % 4 == 0','(y % 4 == 0 and y % 100 != 0) or y % 400 == 0','y % 100 == 0 and y % 400 == 0','y % 4 == 0 or y % 100 != 0'],a:1,r:['This wrongly marks 1700 and 1900 as leap years.','Divisible by 4 but not by 100, or divisible by 400. So 2004 is a leap year and 1700 is not.','This checks only century years.','This is True for almost every year.']},
+{c:'id',d:'E',q:'Which condition checks whether ch is a digit?',o:['ch.isdigit()','ch.isalpha()','ch == digit','ch.isnumber()'],a:0,r:['isdigit() returns True for characters 0 to 9.','isalpha() checks for letters.','digit is an undefined name here.','Python strings have no isnumber() method.']},
+{c:'id',d:'E',q:'In for val in sequence:, what is val?',o:['A keyword','The loop variable that takes each item in turn','The number of items','A function'],a:1,r:['val is a name you choose, not a keyword.','On each iteration, val refers to the next item.','It holds items, not the count.','It is a variable.']},
+{c:'id',d:'M',q:'Which of these values is treated as False in an if condition?',o:['0','"0"','" "','[0]'],a:0,r:['0 is falsy.','A non-empty string, even "0", is truthy.','A space is a non-empty string, so it is truthy.','A list with one item is truthy.']},
+{c:'id',d:'M',q:'In a nested loop, which statement exits only the innermost loop?',o:['break','continue','pass','else'],a:0,r:['break exits the loop it is directly inside; the outer loop keeps going.','continue does not exit any loop.','pass does nothing.','else is not a loop control statement.']},
+{c:'id',d:'M',q:'What does the second case match?',code:'match point:\n    case (0, 0):\n        print("Origin")\n    case (0, y):\n        print("Y-axis at", y)',o:['Only the point (0, 0)','Any point with x = 0, storing its y-value in y','Any point with y = 0','Every point'],a:1,r:['(0, 0) is caught by the first case.','The first value must be 0, and the second value is captured in y.','That would be the pattern (x, 0).','The first value must be 0.']},
+{c:'id',d:'E',q:'What is the correct way to write "else if" in Python?',o:['else if','elseif','elif','elsif'],a:2,r:['"else if" is a SyntaxError in Python.','Not a Python keyword.','elif is Python\'s keyword for else-if.','That is Perl or Ruby, not Python.']},
+
+// ================= MISCELLANEOUS =================
+{c:'ms',d:'E',q:'What is printed?',code:'x = 0\nif x:\n    print("Yes")\nelse:\n    print("No")',o:['Yes','No','0','Error'],a:1,r:['0 is treated as False.','0 is falsy, so the else block runs.','The value is not printed.','Any value can be used as a condition.']},
+{c:'ms',d:'E',q:'What is printed?',code:'if None:\n    print("A")\nprint("B")',o:['A','B','A then B','Error'],a:1,r:['None is treated as False, so A is skipped.','The if body is skipped; B is outside the if, so it prints.','A is skipped.','None is a valid condition.']},
+{c:'ms',d:'M',q:'What is printed?',code:'if -1:\n    print("T")\nelse:\n    print("F")',o:['T','F','Error','-1'],a:0,r:['Any non-zero number, including negative ones, is True.','Only 0 is False among numbers.','Valid code.','The value is not printed.']},
+{c:'ms',d:'M',q:'What is printed?',code:'marks = 75\nif marks > 75:\n    print("distinction")\nelse:\n    print("not distinction")',o:['distinction','not distinction','Nothing','Error'],a:1,r:['75 > 75 is False; you would need >=.','75 is not greater than 75, so else runs.','One of the two blocks always runs.','Valid code.']},
+{c:'ms',d:'M',q:'What is printed?',code:'x = 15\nif x > 10:\n    print("A")\nif x > 5:\n    print("B")',o:['A','B','A\nB','Nothing'],a:2,r:['These are two separate ifs, so both are checked.','The first if also prints.','Both conditions are True, and each if is independent (not elif).','Both conditions are True.']},
+{c:'ms',d:'M',q:'What is printed?',code:'y = 1700\nif (y % 4 == 0 and y % 100 != 0) or y % 400 == 0:\n    print("leap")\nelse:\n    print("not leap")',o:['leap','not leap','Error','Nothing'],a:1,r:['1700 is divisible by 100 but not by 400.','Both parts of the condition are False, so else runs.','Valid code.','One branch always runs.']},
+{c:'ms',d:'E',q:'What is printed?',code:'n = 7\nprint("Even" if n % 2 == 0 else "Odd")',o:['Even','Odd','True','Error'],a:1,r:['7 % 2 is 1, not 0.','This one-line conditional returns "Odd" because 7 is odd.','It returns one of the two strings.','Valid syntax.']},
+{c:'ms',d:'E',q:'What is printed?',code:'for i in range(2, 8, 2):\n    print(i, end=" ")',o:['2 4 6 8','2 4 6','0 2 4 6','2 3 4 5 6 7'],a:1,r:['8 is the stop value, so it is excluded.','Start 2, step 2, stopping before 8.','The start is 2, not 0.','The step is 2, not 1.']},
+{c:'ms',d:'M',q:'What is printed?',code:'for i in range(10, 0, -3):\n    print(i, end=" ")',o:['10 7 4 1','10 7 4','10 7 4 1 -2','7 4 1'],a:0,r:['10, 7, 4, 1. The next value, -2, is past the stop 0.','1 is still greater than 0, so it is included.','-2 is past the stop.','The start value 10 is included.']},
+{c:'ms',d:'E',q:'What is printed?',code:'for ch in "Hi!":\n    print(ch, end="-")',o:['H-i-!','H-i-!-','Hi!-','H i !'],a:1,r:['end is added after every item, including the last.','Each character is followed by -.','The loop goes character by character.','end="-" replaces the newline with -.']},
+{c:'ms',d:'E',q:'What is printed?',code:'s = 0\nfor i in range(1, 5):\n    s += i\nprint(s)',o:['10','15','4','5'],a:0,r:['1 + 2 + 3 + 4 = 10.','15 would need range(1, 6).','Not the sum.','Not the sum.']},
+{c:'ms',d:'M',q:'What is printed?',code:'i = 1\nwhile i < 10:\n    i *= 2\nprint(i)',o:['8','10','16','32'],a:2,r:['8 < 10 is still True, so it doubles once more.','i only takes values 1, 2, 4, 8, 16.','1, 2, 4, 8, 16. Then 16 < 10 is False, so the loop stops.','The loop stops at 16.']},
+{c:'ms',d:'M',q:'What is printed?',code:'num = 10\ni = 1\nwhile i <= num:\n    if i % 5 == 0:\n        break\n    print(i, end=" ")\n    i += 1',o:['1 2 3 4 5','1 2 3 4','1 2 3 4 6 7 8 9','5'],a:1,r:['When i is 5, break runs before print.','It stops at i = 5 without printing it.','break exits the whole loop, so nothing after 5 is printed.','5 is never printed.']},
+{c:'ms',d:'E',q:'What is printed?',code:'for n in range(1, 10):\n    if n % 2 == 0:\n        continue\n    print(n, end=" ")',o:['2 4 6 8','1 3 5 7 9','1 2 3 4 5 6 7 8 9','1'],a:1,r:['Even numbers are the ones being skipped.','continue skips the even numbers, so only odd numbers print.','Even numbers are skipped.','continue does not stop the loop.']},
+{c:'ms',d:'M',q:'What is printed?',code:'for i in range(1, 10):\n    print(i)\n    break\nelse:\n    print("No Break")',o:['1','1 then No Break','1 to 9','No Break'],a:0,r:['1 is printed, then break exits the loop, so else is skipped.','else does not run after a break.','break stops the loop after the first print.','The loop was broken, so else does not run.']},
+{c:'ms',d:'M',q:'What is printed?',code:'for i in range(3):\n    pass\nelse:\n    print("Done")',o:['Nothing','Done','0 1 2','Error'],a:1,r:['The else block runs.','The loop finished without break, so else runs.','pass prints nothing.','Valid code.']},
+{c:'ms',d:'T',q:'What is printed?',code:'i = 5\nwhile i > 0:\n    i -= 2\nelse:\n    print(i)',o:['1','0','-1','Nothing'],a:2,r:['After 1, the loop runs once more.','i never becomes 0 (5, 3, 1, -1).','5, 3, 1, -1. The loop ends normally, so else prints -1.','There is no break, so else runs.']},
+{c:'ms',d:'T',q:'What is printed?',code:'c = 0\nfor i in range(3):\n    for j in range(i):\n        c += 1\nprint(c)',o:['9','3','6','0'],a:1,r:['The inner loop does not run 3 times every time.','The inner loop runs 0, then 1, then 2 times: 0 + 1 + 2 = 3.','Not correct.','The inner loop does run when i is 1 and 2.']},
+{c:'ms',d:'T',q:'What is printed?',code:'for i in range(1, 4):\n    for j in range(1, 4):\n        if j == 2:\n            break\n        print(i, j)',o:['1 1\n2 1\n3 1','1 1\n1 2','1 1','1 1\n1 2\n1 3'],a:0,r:['break exits only the inner loop, so the outer loop continues each time.','break happens before (1, 2) is printed.','The outer loop keeps running after the inner break.','The inner loop breaks at j = 2.']},
+{c:'ms',d:'E',q:'What is printed (Python 3.10+)?',code:'num = 5\nmatch num:\n    case 1:\n        print("One")\n    case _:\n        print("Other")',o:['One','Other','Nothing','Error'],a:1,r:['5 does not match 1.','5 matches no specific case, so the wildcard _ runs.','The wildcard always matches.','Valid code.']},
+{c:'ms',d:'M',q:'What is printed?',code:'point = (0, 5)\nmatch point:\n    case (0, 0):\n        print("Origin")\n    case (0, y):\n        print("Y-axis at", y)\n    case (x, 0):\n        print("X-axis at", x)',o:['Origin','Y-axis at 5','X-axis at 0','Nothing'],a:1,r:['The point is (0, 5), not (0, 0).','x is 0 and y captures 5.','The second value is 5, not 0.','A case does match.']},
+{c:'ms',d:'M',q:'What is printed?',code:'day = "Sunday"\nmatch day:\n    case "Saturday" | "Sunday":\n        print("Weekend")\n    case _:\n        print("Weekday")',o:['Weekend','Weekday','Nothing','Error'],a:0,r:['| means OR in a case pattern, so "Sunday" matches.','The first case matches, so the wildcard is not reached.','A case matches.','| is valid in patterns.']},
+{c:'ms',d:'T',q:'What is printed?',code:'x, y = 50, 20\nwhile y != 0:\n    x, y = y, x % y\nprint(x)',o:['50','20','10','0'],a:2,r:['x changes inside the loop.','Not the final value.','This is the GCD algorithm: (50, 20), then (20, 10), then (10, 0). gcd = 10.','0 is y at the end, not x.']},
+{c:'ms',d:'M',q:'What is printed?',code:'s = 0\ni = 2\nwhile i <= 10:\n    s += i\n    i += 2\nprint(s)',o:['20','30','25','55'],a:1,r:['Not correct.','2 + 4 + 6 + 8 + 10 = 30.','That is the sum of the odd numbers 1 to 9.','That is the sum of 1 to 10.']},
+{c:'ms',d:'E',q:'What is printed?',code:'for i in range(1, 11, 2):\n    print(i, end=" ")',o:['1 3 5 7 9','1 3 5 7 9 11','2 4 6 8 10','1 2 3 4 5'],a:0,r:['Start 1, step 2, stopping before 11.','11 is the stop value, so it is excluded.','The start is 1.','The step is 2.']},
+{c:'ms',d:'E',q:'What is printed?',code:'print(list(range(0)))',o:['[0]','[]','None','Error'],a:1,r:['range(0) contains no numbers.','range(0) is empty, so the list is empty.','list() returns a list, not None.','Valid code.']},
+{c:'ms',d:'T',q:'What is printed?',code:'n = 1234\nrev = 0\nwhile n > 0:\n    rev = rev * 10 + n % 10\n    n //= 10\nprint(rev)',o:['1234','4321','10','0'],a:1,r:['The digits are reversed.','Each step takes the last digit (n % 10) and adds it to rev.','10 would be the sum of the digits.','rev is built up in the loop.']},
+{c:'ms',d:'E',q:'What is printed?',code:'count = 0\nfor ch in "banana":\n    if ch == "a":\n        count += 1\nprint(count)',o:['2','3','6','1'],a:1,r:['"banana" has three a\'s.','b-a-n-a-n-a contains 3 a\'s.','6 is the length of the word.','Not correct.']},
+{c:'ms',d:'M',q:'What is printed?',code:'for i in range(3):\n    print("*" * (i + 1))',o:['*\n**\n***','***\n**\n*','*\n*\n*','**\n***\n****'],a:0,r:['i goes 0, 1, 2, so 1, 2, then 3 stars.','This would need a decreasing count.','The count changes each line.','i + 1 starts at 1, not 2.']},
+{c:'ms',d:'M',q:'What is the LAST line printed?',code:'x = 9\nfor i in range(1, 4):\n    print(x, "*", i, "=", x * i)',o:['9 * 4 = 36','9 * 3 = 27','9 * 1 = 9','27'],a:1,r:['4 is the stop value, so it is excluded.','The loop ends at i = 3, and print adds spaces between items.','That is the first line.','print shows all the items, not just the product.']},
+
+// ================= BEYOND THE NOTES (sample-paper style) =================
+{c:'bn',d:'M',q:'What is printed?',code:'print([i**2 for i in range(5) if i % 2 == 0])',o:['[0, 4, 16]','[0, 1, 4, 9, 16]','[1, 9]','[0, 2, 4]'],a:0,r:['List comprehension: only even i (0, 2, 4) are squared.','The if keeps only the even numbers.','Those are the squares of the odd numbers.','These are not squared.']},
+{c:'bn',d:'M',q:'What is printed?',code:'a = [1, 2, 3, 4]\nb = [3, 4, 5]\nprint([x for x in a if x not in b])',o:['[1, 2]','[5]','[3, 4]','[1, 2, 5]'],a:0,r:['This keeps the items of a that are not in b.','5 is not in a.','Those are the common items, which are removed.','Only items from a are taken.']},
+{c:'bn',d:'T',q:'What is printed?',code:'print(0.1 + 0.2 == 0.3)',o:['True','False','Error','None'],a:1,r:['Floats are stored in binary, which causes tiny errors.','0.1 + 0.2 is 0.30000000000000004, which is not exactly 0.3.','Valid code.','== returns a Boolean.']},
+{c:'bn',d:'E',q:'Which values can x take?',code:'import random\nx = random.randint(1, 6)',o:['1 to 5','0 to 6','1 to 6, both included','Any float between 1 and 6'],a:2,r:['randint includes the end value.','The start is 1.','randint(a, b) includes both a and b, like a dice roll.','randint returns integers only.']},
+{c:'bn',d:'M',q:'Which statement about random.random() is TRUE?',o:['It returns an int from 0 to 1','It returns a float with 0.0 <= x < 1.0','It can return 1.0','It needs two arguments'],a:1,r:['It returns a float, not an int.','A float from 0.0 up to, but never including, 1.0.','1.0 is excluded.','It takes no arguments.']},
+{c:'bn',d:'T',q:'What is printed?',code:'print(17 % 5, -17 % 5)',o:['2 -2','2 3','2 2','3 2'],a:1,r:['In Python, % takes the sign of the divisor (5 is positive).','17 % 5 = 2, and -17 % 5 = 3, because -17 = 5 x (-4) + 3.','The second result is 3.','The order is wrong.']},
+{c:'bn',d:'M',q:'What is printed?',code:'x = [1, 2, 3]\ny = x\ny.append(4)\nprint(x)',o:['[1, 2, 3]','[1, 2, 3, 4]','[4, 1, 2, 3]','Error'],a:1,r:['y is not a copy.','y = x makes y another name for the same list (aliasing).','append adds to the end.','Valid code.']},
+{c:'bn',d:'E',q:'Replacing a fixed value inside a function with a parameter, so it works for more cases, is called:',o:['Encapsulation','Generalization','Iteration','Composition'],a:1,r:['Encapsulation is wrapping code inside a function.','Adding a parameter generalises the function.','Iteration means repetition with loops.','Composition means combining expressions or functions.']},
+{c:'bn',d:'T',q:'What is printed?',code:'def f():\n    print("Hi")\nprint(f())',o:['Hi','Hi\nNone','None','Error'],a:1,r:['print(f()) also prints what f returns.','f prints Hi, then returns None (it has no return), and None is printed.','Hi is printed first.','Valid code.']},
+{c:'bn',d:'T',q:'What is printed?',code:'print(True + True, bool("False"))',o:['2 False','2 True','True False','Error'],a:1,r:['"False" is a non-empty string, so bool gives True.','True counts as 1, so 1 + 1 = 2. Any non-empty string is True.','True + True is a number.','Valid code.']},
+{c:'bn',d:'M',q:'What is printed?',code:'i = 0\nwhile i < 3:\n    i += 1\n    if i == 2:\n        continue\n    print(i, end=" ")',o:['1 2 3','1 3','0 1 3','1'],a:1,r:['2 is skipped by continue.','i becomes 1 and prints; becomes 2 and is skipped; becomes 3 and prints.','i is increased before printing, so 0 is never printed.','continue does not stop the loop.']},
+{c:'bn',d:'T',q:'What is printed?',code:'for i in range(3):\n    for j in range(3):\n        if i == j:\n            break\n    else:\n        print("no break")\nprint("end")',o:['no break\nend','end','no break\nno break\nno break\nend','Error'],a:1,r:['The inner loop breaks every time.','For each i, the inner loop reaches j = i and breaks, so its else never runs.','The inner else never runs.','Valid code; this else belongs to the inner for.']},
+{c:'bn',d:'E',q:'What is printed?',code:'x = 10\nresult = "big" if x > 5 else "small"\nprint(result)',o:['big','small','True','Error'],a:0,r:['A one-line conditional expression (ternary): 10 > 5 is True.','That would need x <= 5.','It returns the string, not a Boolean.','Valid syntax.']}
+];
+
+let cat = 'th', pos = 0, showRes = false;
+const ans = {};
+const $ = id => document.getElementById(id);
+const list = () => Q.map((x, i) => i).filter(i => Q[i].c === cat);
+
+function stats(k) {
+  const ids = Q.map((x, i) => i).filter(i => !k || Q[i].c === k);
+  let done = 0, ok = 0;
+  ids.forEach(i => { if (ans[i] !== undefined) { done++; if (ans[i] === Q[i].a) ok++; } });
+  return { total: ids.length, done, ok };
+}
+
+function renderScore() {
+  const s = stats();
+  $('score2').innerHTML = `<span>Answered: ${s.done} / ${s.total}</span><span>Correct: ${s.ok}</span><span>Accuracy: ${s.done ? Math.round(s.ok / s.done * 100) : 0}%</span>`;
+}
+
+function renderTabs() {
+  const t = $('tabs2');
+  t.innerHTML = '';
+  CATS.forEach(c => {
+    const s = stats(c.k);
+    const b = document.createElement('button');
+    b.className = 'tab' + (c.k === cat && !showRes ? ' on' : '');
+    b.innerHTML = `${c.n} <small>(${s.ok}/${s.total})</small>`;
+    b.onclick = () => { cat = c.k; pos = 0; showRes = false; render(); };
+    t.appendChild(b);
+  });
+}
+
+function renderPalette() {
+  const p = $('palette2');
+  p.innerHTML = '';
+  if (showRes) return;
+  list().forEach((qi, n) => {
+    const b = document.createElement('button');
+    let cls = 'pal';
+    if (n === pos) cls += ' cur';
+    if (ans[qi] !== undefined) cls += ans[qi] === Q[qi].a ? ' ok' : ' bad';
+    b.className = cls;
+    b.textContent = n + 1;
+    b.onclick = () => { pos = n; render(); };
+    p.appendChild(b);
+  });
+}
+
+function renderQ() {
+  const m = $('main2');
+  const L = list();
+  const qi = L[pos];
+  const x = Q[qi];
+  const answered = ans[qi] !== undefined;
+  m.innerHTML = '';
+  const card = document.createElement('div');
+  card.className = 'card';
+
+  const meta = document.createElement('div');
+  meta.className = 'meta';
+  meta.innerHTML = `<span>Question ${pos + 1} of ${L.length}</span><span class="badge ${x.d}">${DIFF[x.d]}</span>`;
+  card.appendChild(meta);
+
+  const q = document.createElement('div');
+  q.className = 'q';
+  q.textContent = x.q;
+  card.appendChild(q);
+
+  if (x.code) {
+    const pre = document.createElement('pre');
+    pre.textContent = x.code;
+    card.appendChild(pre);
+  }
+
+  x.o.forEach((opt, i) => {
+    const b = document.createElement('button');
+    b.className = 'opt';
+    const l = document.createElement('span');
+    l.className = 'l';
+    l.textContent = 'ABCD'[i] + '.';
+    const t = document.createElement('span');
+    t.className = 't';
+    t.textContent = opt;
+    b.appendChild(l);
+    b.appendChild(t);
+    if (answered) {
+      b.disabled = true;
+      if (i === x.a) b.classList.add('right');
+      else if (i === ans[qi]) b.classList.add('wrong');
+      else b.classList.add('dim');
+      const w = document.createElement('span');
+      w.className = 'why';
+      w.textContent = (i === x.a ? '✔ Correct: ' : '✘ Wrong: ') + x.r[i];
+      b.appendChild(w);
+    } else {
+      b.onclick = () => { ans[qi] = i; render(); };
+    }
+    card.appendChild(b);
+  });
+
+  if (answered) {
+    const v = document.createElement('div');
+    const good = ans[qi] === x.a;
+    v.className = 'verdict ' + (good ? 'ok' : 'bad');
+    v.textContent = good ? 'Well done! Your answer is correct.' : 'Not quite. The correct answer is ' + 'ABCD'[x.a] + '. Read the reasons under each option.';
+    card.appendChild(v);
+  }
+
+  const nav = document.createElement('div');
+  nav.className = 'nav';
+  const prev = document.createElement('button');
+  prev.className = 'btn s';
+  prev.textContent = '← Previous';
+  prev.disabled = pos === 0;
+  prev.onclick = () => { pos--; render(); };
+  const next = document.createElement('button');
+  next.className = 'btn p';
+  const ci = CATS.findIndex(c => c.k === cat);
+  if (pos < L.length - 1) {
+    next.textContent = 'Next →';
+    next.onclick = () => { pos++; render(); };
+  } else if (ci < CATS.length - 1) {
+    next.textContent = 'Next section →';
+    next.onclick = () => { cat = CATS[ci + 1].k; pos = 0; render(); };
+  } else {
+    next.textContent = 'See results';
+    next.onclick = () => { showRes = true; render(); };
+  }
+  nav.appendChild(prev);
+  nav.appendChild(next);
+  card.appendChild(nav);
+  m.appendChild(card);
+}
+
+function renderResults() {
+  const s = stats();
+  let rows = '';
+  CATS.forEach(c => {
+    const t = stats(c.k);
+    rows += `<tr><td>${c.n}</td><td>${t.done} / ${t.total}</td><td>${t.ok}</td><td>${t.done ? Math.round(t.ok / t.done * 100) : 0}%</td></tr>`;
+  });
+  const pct = s.done ? Math.round(s.ok / s.done * 100) : 0;
+  let msg = 'Start answering to see your progress.';
+  if (s.done) msg = pct >= 85 ? 'Excellent! You are test-ready.' : pct >= 65 ? 'Good. Revise the questions you got wrong.' : 'Keep going. Reread the notes for your weakest section.';
+  $('main2').innerHTML = `<div class="result">
+    <div class="big">${s.ok} / ${s.total}</div>
+    <p style="margin:4px 0 0">${msg}</p>
+    <table><tr><th>Section</th><th>Answered</th><th>Correct</th><th>Accuracy</th></tr>${rows}</table>
+    <p style="font-size:13.5px;color:#6b6f8f;margin-bottom:0">Tip: open any section and tap the red numbers to review your mistakes.</p>
+  </div>`;
+}
+
+function render() {
+  renderScore();
+  renderTabs();
+  renderPalette();
+  if (showRes) renderResults(); else renderQ();
+}
+
+$('resBtn2').onclick = () => { showRes = true; render(); };
+$('resetBtn2').onclick = () => {
+  if (showRes) { Object.keys(ans).forEach(k => delete ans[k]); showRes = false; pos = 0; render(); return; }
+  list().forEach(i => delete ans[i]);
+  pos = 0;
+  render();
+};
+
+render();
+})();
+</script>
 
 <!-- ================= VIEW: COMING SOON ================= -->
 <div class="view" id="v-soon">
